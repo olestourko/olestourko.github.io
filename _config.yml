@@ -1,1 +1,5 @@
+title: Oles Tourko
+baseurl: ''
+exclude: ['README.md']
 theme: jekyll-theme-architect
+show_downloads: false
