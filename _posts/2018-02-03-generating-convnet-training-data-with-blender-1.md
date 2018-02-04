@@ -1,12 +1,13 @@
 ---
 layout: post
 title: Generating ConvNet training data with Blender (Part 1)
+categories: [machine learning, python, blender] 
 ---
 
 ## Overview
 I'm working on a ML project to detect trash in specific settings, like on grass or the bank of a river.
-A challenge is that there doesn't seem to be a large and labelled training dataset available for this.
-Training ConvNets requires a LOT of data, so as an alternative to taking thousands of photos, I'm trying to create synthetic data using Blender scripts:
+There doesn't seem to be a large and labelled training dataset available for this, and training ConvNets requires a LOT of data.
+As an alternative to taking thousands of photos myself and labelling them, I'm trying to create synthetic data using Blender scripts:
 
 1. Use Blender's physics engine to randomly drop trash into the scene.
 2. Render the scene at many different camera angles. Save an image of each render.
@@ -14,7 +15,7 @@ Training ConvNets requires a LOT of data, so as an alternative to taking thousan
 
 ## Blender Scene
 
-I created a Blender scene with two placeholder objects, a Cube and Sphere. I set them up for rigidbody physics so that they can be dropped in later on.
+I created a Blender scene with two placeholder objects, a cube and sphere. I set them up for rigidbody physics so that they can be dropped in later on.
 My Blender setup and scripts are available [here](https://github.com/olestourko/ml-garbage-classifier-tensorflow/tree/master/blender-data-genenerator).
 
 ![Render](/assets/posts/blender-render-1.jpg)
@@ -51,7 +52,7 @@ def simulate(scene, mesh_objects, spawn_range):
         scene.frame_set(i)
 {% endhighlight %}
 
-### bounding_box.py
+### boundingbox.py
 Figures out the bounding boxes for an object if its visible, returns `None` otherwise. Check out the comments to understand how it works.
 
 {% highlight python %}
@@ -249,7 +250,7 @@ Here are some random frames it created:
 ![Render 5](/assets/posts/0-6y-4p.png)
 ![Render 6](/assets/posts/7-8y-8p.png)
 
-And here's what the `labels.json` entry for one them (the first image):
+And here's the `labels.json` entry for one them (the first image):
 
 {% highlight json %}
     {
