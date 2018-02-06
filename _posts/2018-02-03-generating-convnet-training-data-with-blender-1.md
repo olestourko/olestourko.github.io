@@ -5,13 +5,13 @@ categories: [machine learning, python, blender]
 ---
 
 ## Overview
-I'm working on a ML project to detect trash in specific settings, like on grass or the bank of a river.
+I'm working on a machine learning project to detect trash in specific settings, like on grass or the bank of a river.
 There doesn't seem to be a large and labelled training dataset available for this, and training ConvNets requires a LOT of data.
 As an alternative to taking thousands of photos myself and labelling them, I'm trying to create synthetic data using Blender scripts:
 
 1. Use Blender's physics engine to randomly drop trash into the scene.
 2. Render the scene at many different camera angles. Save an image of each render.
-3. For each render, determine which objects are visible in the scene and their bounding boxes. Save this data to a file.
+3. For each render, determine which objects are visible in the scene and their bounding boxes. Save these labels to a file.
 
 ## Blender Scene
 
@@ -136,10 +136,10 @@ def camera_view_bounds_2d(scene, camera_object, mesh_object):
 This module has two methods, and is the script I actually run from Blender.
 
 `render()` rotates the camera around its center, rendering each step. It also uses `bounding_box` to figure
-out the visibility and bounding boxes in each render, appending the results to a file.
+out the visibility and bounding boxes in each render, and returns all the labels for the renders.
 
 `batch_render()` combines all the other modules. It sets up a scene with `scene_setup`, renders a bunch of angles with `render()`,
-and repeats.
+and repeats. It writes all the labels from `render()` to a `labels.json`.
 
 {% highlight python %}
 import bpy, os
@@ -149,9 +149,12 @@ import json
 import sys
 import boundingbox
 
-def render(scene, camera_object, mesh_objects, camera_steps, file, file_prefix="render"):
-    radians_in_circle = 2.0 * pi
+def render(scene, camera_object, mesh_objects, camera_steps, file_prefix="render"):
+    """
+    Renders the scene at different camera angles to a file, and returns a list of label data
+    """
 
+    radians_in_circle = 2.0 * pi
     original_position = np.matrix([
         [8],
         [0],
@@ -209,13 +212,11 @@ def render(scene, camera_object, mesh_objects, camera_steps, file, file_prefix="
 
             labels.append(label_entry)
 
-    """ Write labels to file """
-    json.dump(labels, file, sort_keys=True, indent=4, separators=(',', ': '))
+    return labels
 
 
 def batch_render(scene, camera_object, mesh_objects):
     import scene_setup
-
     camera_steps = 10
     scene_setup_steps = 10
     spawn_range = [
@@ -223,11 +224,17 @@ def batch_render(scene, camera_object, mesh_objects):
         (-10, 10),
         (5, 10)
     ]
+    labels = []
+
+    for i in range(0, scene_setup_steps):
+        scene_setup.simulate(scene, mesh_objects, spawn_range)
+        scene_labels = render(scene, camera_object, mesh_objects, camera_steps, file_prefix=i)
+        labels += scene_labels # Merge lists
+
     with open('./renders/labels.json', 'w+') as f:
-        for i in range(0, scene_setup_steps):
-            scene_setup.simulate(scene, mesh_objects, spawn_range)
-            render(scene, camera_object, mesh_objects, camera_steps, f, file_prefix=i)
-            
+        json.dump(labels, f, sort_keys=True, indent=4, separators=(',', ': '))
+
+
 if __name__ == '__main__':
     scene = bpy.data.scenes['Scene']
     camera_object = bpy.data.objects['Camera']
@@ -239,7 +246,7 @@ if __name__ == '__main__':
 
 ## Results
 `batch_render.py` writes rendered images to `./renders/`, as well as a `labels.json` file with the visible objects
-and their bounding boxes for each render. This takes a while with the step settings I have in the script above, and produces ~1,000 renders.
+and their bounding boxes. This takes a while with the step settings I set in the script above, and produces ~1,000 renders.
 
 Here are some random frames it created:
 
