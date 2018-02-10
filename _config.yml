@@ -3,6 +3,7 @@ baseurl: ''
 exclude: ['README.md']
 theme: jekyll-theme-architect
 show_downloads: false
+permalink: /:year/:month/:day/:title.html
 
 github:
   is_project_page: false
