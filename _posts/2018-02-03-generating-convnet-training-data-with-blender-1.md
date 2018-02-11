@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Generating ConvNet training data with Blender (Part 1)
-categories: [machine learning, python, blender] 
+title: "Generating ConvNet training data with Blender - Part 1: Automating Renders" 
+categories: [machine learning, python, blender]
 ---
 
 ## Overview
@@ -12,6 +12,8 @@ As an alternative to taking thousands of photos myself and labelling them, I'm t
 1. Use Blender's physics engine to randomly drop trash into the scene.
 2. Render the scene at many different camera angles. Save an image of each render.
 3. For each render, determine which objects are visible in the scene and their bounding boxes. Save these labels to a file.
+
+At the end of this part, we'll have a system to automatically create renders and labels for a scene with placeholder objects.
 
 ## Blender Scene
 

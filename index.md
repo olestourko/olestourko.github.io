@@ -19,7 +19,9 @@ You won't find me on most social media sites because I don't use them :)
 
 ---
 
-## Recent posts
+## Recent Posts
+<div>
 {% for post in site.posts limit:10 %}
-  [{{ post.title }}]({{ post.url }}) - {{post.date | date: "%-d %B %Y"}}
+  <a href="{{ post.url }}">{{ post.title }} - {{post.date | date: "%-d %B %Y"}}</a><br>
 {% endfor %}
+</div>

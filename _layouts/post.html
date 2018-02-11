@@ -14,6 +14,7 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
+    {% include mathjax.html %}
     {% seo %}
 </head>
 
@@ -40,7 +41,11 @@
 <div id="content-wrapper">
     <div class="inner clearfix">
         <section id="main-content">
-            <h1>{{ page.title }}</h1>
+            {% if page.title_long %}
+                <h2>{{ page.title_long }}</h2>
+            {% else %}
+                <h2>{{ page.title }}</h2>
+            {% endif %}
             <hr>
             {{ content }}
         </section>
