@@ -10,6 +10,8 @@ My background is in Computer Science and I've been doing web development profess
 
 I'm also a machine learning hobbyist and am very interested in how we can use it to solve problems. Investing and sustainability are areas I like, and my personal projects are _usually_ related to them.
 
+[My CV / Resumé]({{ 'assets/download/oles-tourko-cv.pdf' | absolute_url }})
+
 ## Contact
 
 Email: [olestourko@gmail.com](mailto:olestourko@gmail.com)  
