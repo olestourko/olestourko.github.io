@@ -43,9 +43,16 @@ This script is pretty simple. It randomly positions the objects somewhere above 
 import bpy
 import random
 
-def simulate(scene, mesh_objects, spawn_range):
+def simulate(scene, mesh_objects, spawn_range, p_visible):
     scene.frame_set(0)
     for object in mesh_objects:
+        if random.uniform(0, 1) <= p_visible:
+            object.hide = False
+            object.hide_render = False
+        else:
+            object.hide = True
+            object.hide_render = True
+
         object.location.x = random.randrange(spawn_range[0][0], spawn_range[0][1])
         object.location.y = random.randrange(spawn_range[1][0], spawn_range[1][1])
         object.location.z = random.randrange(spawn_range[2][0], spawn_range[2][1])
@@ -229,7 +236,7 @@ def batch_render(scene, camera_object, mesh_objects):
     labels = []
 
     for i in range(0, scene_setup_steps):
-        scene_setup.simulate(scene, mesh_objects, spawn_range)
+        scene_setup.simulate(scene, mesh_objects, spawn_range, 0.75)
         scene_labels = render(scene, camera_object, mesh_objects, camera_steps, file_prefix=i)
         labels += scene_labels # Merge lists
 
