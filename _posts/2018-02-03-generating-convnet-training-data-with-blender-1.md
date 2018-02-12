@@ -266,7 +266,7 @@ Here are some random frames it created:
 ![Render 5](/assets/posts/0-6y-4p.png)
 ![Render 6](/assets/posts/7-8y-8p.png)
 
-And here's the `labels.json` entry for one them (the first image):
+And here's the `labels.json` entry for one of them (the first image):
 
 {% highlight json %}
     {
