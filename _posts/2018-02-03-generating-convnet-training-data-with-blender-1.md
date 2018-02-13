@@ -19,7 +19,7 @@ At the end of this part, we'll have a system to automatically create renders and
 ## Blender Scene
 
 I created a Blender scene with two placeholder objects, a cube and sphere. I set them up for rigidbody physics so that they can be dropped in later on.
-My Blender setup and scripts are available [here](https://github.com/olestourko/ml-garbage-classifier-tensorflow/tree/master/blender-data-genenerator).
+My Blender setup and scripts are available [here](https://github.com/olestourko/ml-garbage-classifier-tensorflow/tree/master/blender-data-generator).
 
 ![Render](/assets/posts/blender-render-1.jpg)
 ![Scene](/assets/posts/blender-scene.jpg)
