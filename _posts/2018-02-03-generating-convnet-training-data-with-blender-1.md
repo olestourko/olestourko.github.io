@@ -2,6 +2,7 @@
 layout: post
 title: "Generating ConvNet training data with Blender - Part 1: Automating Renders" 
 categories: [machine learning, python, blender]
+image: 'assets/posts/generating-convnet-training-data-with-blender.jpg'
 ---
 
 ## Overview
