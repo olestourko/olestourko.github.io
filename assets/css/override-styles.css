@@ -1,3 +1,9 @@
 figure {
     margin: 0 !important
 }
+table {
+    width: auto;
+}
+table td, th {
+    padding: 0 0.5em;
+}

@@ -14,6 +14,7 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
+    {% include mathjax.html %}
     {% include google_analytics.html %}
     {% seo %}
 </head>
@@ -58,6 +59,7 @@
 
             <strong>Posts</strong>
             {% include posts_list.html %}
+            {% include side_links.html %}
 
             {% if site.github.is_project_page %}
             <p class="repo-owner"><a href="{{ site.github.repository_url }}">{{ site.github.repository_name }}</a> is
