@@ -17,8 +17,6 @@ I'm also a machine learning hobbyist and am very interested in how we can use it
 Email: [olestourko@gmail.com](mailto:olestourko@gmail.com)  
 LinkedIn: [olestourko](https://www.linkedin.com/in/olestourko/)
 
-You won't find me on most social media sites because I don't use them :)
-
 ---
 
 ## Recent Posts
