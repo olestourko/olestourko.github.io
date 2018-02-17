@@ -71,7 +71,7 @@ In a RNN, the activation value of the previous example is fed into the current e
 $a^{\langle 0 \rangle}$ is typically initialized to be all 0's.  
 
 $a^{\langle t \rangle} = g(W_{aa} a^{\langle t-1 \rangle} \ W_{ax} x^{\langle t \rangle} + b_a)$ usually `tanh` or `relu`  
-$\hat{y}^{\langle i \rangle} = g(W_{ya} a^{\langle t \rangle} + b_y)$ usually `sigmoid`  
+$\hat{y}^{\langle i \rangle} = g(W_{ya} a^{\langle t \rangle} + b_y)$ usually `softmax` or `sigmoid`.  
 
 Where  
 
@@ -167,4 +167,49 @@ $$\mathcal{L}^{\langle t \rangle}(\hat{y}^{\langle t \rangle}, y^{\langle t \ran
 $$\mathcal{L} = \sum_{t=1}^{T_y} \mathcal{L}^{\langle t \rangle}(\hat{y}^{\langle t \rangle}, y^{\langle t \rangle})$$
 
 ---
-**More notes to come**
+
+### Sampling novel sequences
+An RNN can be used to generate new text. Instead of feeding $y^{\langle t \rangle}$ into $x^{\langle t+1 \rangle}$, you can feed
+$\hat{y}^{\langle t \rangle}$ into $x^{\langle t+1 \rangle}$. $x^{\langle t+1 \rangle}$ is a softmax distribution (a probability for each word), so you can use `np.random.choice` to choose a word.
+
+![Sampling](/assets/study-notes/sequence-models/3.png)  
+
+---
+
+### Vanishing gradients &amp; the  Gated Recurrent Unit
+
+Vanishing gradients make long-range dependencies are difficult to learn. 
+
+**_The cat, which already ate... was full_** vs. **_The cats, which already ate... were full_**
+
+_Exploding_ gradients are easily fixed through
+gradient clamping, but vanishing gradients are fixed by something called a Gated Recurrent Unit:
+
+$c$ = memory unit  
+$c^{\langle t \rangle} = a^{\langle t \rangle}$    
+$\tilde{c}^{\langle t \rangle} = tanh(W_c[c^{\langle t-1 \rangle}, x^{\langle t \rangle}] + b_c)$ (the "candidate value")    
+$\Gamma_u = sigmoid(W_u[c^{\langle t-1 \rangle}, x^{\langle t \rangle}] + b_u)$ (the "update gate")  
+
+The purpose of the update gate is to determine when $c$ should be updated.
+
+$c^{\langle t \rangle} = \Gamma_u * \tilde{c}^{\langle t \rangle} + (1 - \Gamma_u) * c^{\langle t-1 \rangle}$  
+$c^{\langle t \rangle}$ and $\tilde{c}^{\langle t \rangle}$, $\Gamma_u$ can be vectors, so the $*$ operations are element-wise multiplication. 
+
+This all works because $\Gamma_u$ usually stays very close to 0, until it needs to update.  
+Full explanation [here](https://www.coursera.org/learn/nlp-sequence-models/lecture/agZiL/gated-recurrent-unit-gru). Note that this is a simplified
+GRU, the Coursera video also describes a modified full GRU.
+
+---
+
+### Long Short Term Memory (LSTM)
+
+A more powerful and more general version of the GRU.  
+
+$\tilde{c}^{\langle t \rangle} = tanh(W_c[a^{\langle t-1 \rangle}, x^{\langle t \rangle}] + b_c)$ (note the direct use of $a$ instead of $c$)   
+$\Gamma_u = sigmoid(W_u[a^{\langle t-1 \rangle}, x^{\langle t \rangle}] + b_u)$  
+$\Gamma_f = sigmoid(W_f[a^{\langle t-1 \rangle}, x^{\langle t \rangle}] + b_f)$ (the "forget" gate)  
+$\Gamma_o = sigmoid(W_o[a^{\langle t-1 \rangle}, x^{\langle t \rangle}] + b_f)$ (the "output" gate)  
+$c^{\langle t \rangle} = \Gamma_u * \tilde{c}^{\langle t \rangle} + \Gamma_f * c^{\langle t-1 \rangle}$  
+$a^{\langle t \rangle} = \Gamma_o * tanh \space c^{\langle t \rangle}$  
+
+![LSTM Diagram](/assets/study-notes/sequence-models/4.png)
