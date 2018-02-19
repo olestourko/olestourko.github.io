@@ -213,3 +213,31 @@ $c^{\langle t \rangle} = \Gamma_u * \tilde{c}^{\langle t \rangle} + \Gamma_f * c
 $a^{\langle t \rangle} = \Gamma_o * tanh \space c^{\langle t \rangle}$  
 
 ![LSTM Diagram](/assets/study-notes/sequence-models/4.png)
+
+---
+
+### Bidirectional RNNs
+
+A bidirectional RNN is able to look forward into a sequence. It has two stages of forward propagation; a forward-looking
+sequence and a backwards-looking sequence.  
+
+![BRNN Diagram](/assets/study-notes/sequence-models/5.png)
+
+The prediction function looks like this:  
+
+$\hat{y}^{\langle t \rangle} = g(W_y[\overrightarrow{a}^{\langle t \rangle}, \overleftarrow{a}^{\langle t \rangle}] + b_y)$  
+
+where $\overrightarrow{a}^{\langle t \rangle}$ and $\overleftarrow{a}^{\langle t \rangle}$ are the forward and backward stages.  
+
+The blocks don't have to be standard RNN blocks; they can also be GRU/LSTM blocks.
+
+---
+
+### Deep RNNs
+
+There are usually only two or three layers in a deep RNN because there is already a temporal dimension.
+
+![Deep RNN](/assets/study-notes/sequence-models/6.png)
+
+Notation: $a^{[layer]\langle t \rangle}$  
+Example activation: $a^{[2]\langle 3 \rangle} = g(W_a^{[2]} [a^{[2] \langle 2 \rangle}, a^{[1] \langle 3 \rangle}] + b_a^{[2]})$
