@@ -2,6 +2,7 @@
 layout: post
 title: "Generating ConvNet training data with Blender - Part 2: Feeding a Neural Net" 
 categories: [machine learning, python, blender]
+image: 'assets/posts/generating-convnet-training-data-with-blender-1.jpg'
 ---
 
 ## Overview
