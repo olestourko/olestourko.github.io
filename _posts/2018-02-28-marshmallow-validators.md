@@ -67,6 +67,6 @@ As it turns out Validator classes aren't the only option, either:
 
 ### Resources
 
-[Validation Quick Guide](http://marshmallow.readthedocs.io/en/latest/quickstart.html#field-validators-as-methods)
-[API Reference for Fields](https://marshmallow.readthedocs.io/en/latest/api_reference.html#module-marshmallow.fields)
+[Validation Quick Guide](http://marshmallow.readthedocs.io/en/latest/quickstart.html#field-validators-as-methods)  
+[API Reference for Fields](https://marshmallow.readthedocs.io/en/latest/api_reference.html#module-marshmallow.fields)  
 [API Reference for Validation](https://marshmallow.readthedocs.io/en/latest/api_reference.html#module-marshmallow.validate)
