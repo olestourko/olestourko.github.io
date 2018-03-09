@@ -70,7 +70,7 @@ In a RNN, the activation value of the previous example is fed into the current e
 
 $a^{\langle 0 \rangle}$ is typically initialized to be all 0's.  
 
-$a^{\langle t \rangle} = g(W_{aa} a^{\langle t-1 \rangle} \ W_{ax} x^{\langle t \rangle} + b_a)$ usually `tanh` or `relu`  
+$a^{\langle t \rangle} = g(W_{aa} a^{\langle t-1 \rangle} + W_{ax} x^{\langle t \rangle} + b_a)$ usually `tanh` or `relu`  
 $\hat{y}^{\langle i \rangle} = g(W_{ya} a^{\langle t \rangle} + b_y)$ usually `softmax` or `sigmoid`.  
 
 Where  
