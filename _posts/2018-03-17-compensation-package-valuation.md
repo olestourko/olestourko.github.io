@@ -2,7 +2,7 @@
 layout: post
 title: "Compensation package valuation" 
 categories: [salary, valuation, investing]
-image: 'assets/posts/2018-02-28/marshmallow-logo.png'
+image: 'assets/posts/2018-03-17/banknotes.jpg'
 ---
 
 This is an article about financially valuing compensation packages, or at least the way I do it. Whether you are
