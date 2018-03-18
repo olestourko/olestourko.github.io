@@ -20,20 +20,20 @@ Do your due diligence!
 
 ## Valuing non-salary compensation
 
-This is where all the trickier valuation questions are. Non-salary compensation is usually a significant part of a package as developer.
+This is where all the trickier valuation questions are. Non-salary compensation is usually a significant part of the package as a developer.
 These are things like bonuses, retirement savings plan matching, expense reimbursements, etc...
 
-I think its useful to split these items into three categories based on tangibility.
+I think its useful to split these items into three categories based on tangibility:
 
 ### Highly Tangible Perks
-Things like bonuses, RRSP contribution matching, company stock, etc... are basically deferred cashflow. For example, you have to wait 1 year
-to receive a bonus. You have to wait 2 years (or more) for employer RRSP contributions or stock to fully vest. 
+Things like bonuses, RRSP contribution matching, company stock, etc... are basically deferred cashflows. For example, you have to wait 1 year
+to receive a bonus. You have to wait 2 years (or more) for employer RRSP/401k contributions or stock to fully vest. 
 
 - Bonuses
 - RRSP / 401k contribution matching
 - Company stock
 
-I take the face value of these things and [discount](https://en.wikipedia.org/wiki/Discounted_cash_flow)
+I take the face value of these and [discount](https://en.wikipedia.org/wiki/Discounted_cash_flow)
 them for the risk that comes with waiting to recieve them. This ties into the [Time Value of Money](https://www.investopedia.com/terms/t/timevalueofmoney.asp);
  the idea that having a dollar today is worth more than having the same dollar tomorrow.
 
@@ -41,7 +41,7 @@ them for the risk that comes with waiting to recieve them. This ties into the [T
 Well there's a lot that can happen over that year you wait before receiving an annual bonus:
 - Getting laid off that year and not receiving it
 - Having to leave because of some family / life event 
-- Coming across a better opportunity and having to leave before receiving it
+- Coming across a better opportunity and having to leave before receiving your bonus
 - Missing out on a year of investment gains you would otherwise have had if you invested it
 - The bonus being worth slightly less to you a year from now due to price inflation
 
