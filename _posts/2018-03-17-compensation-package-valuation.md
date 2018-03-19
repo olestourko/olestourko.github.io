@@ -25,7 +25,6 @@ These are things like bonuses, retirement savings plan matching, expense reimbur
 
 I think its useful to split these items into three categories based on tangibility:
 
-### Highly Tangible Perks
 Things like bonuses, RRSP contribution matching, company stock, etc... are basically deferred cashflows. For example, you have to wait 1 year
 to receive a bonus. You have to wait 2 years (or more) for employer RRSP/401k contributions or stock to fully vest. 
 
@@ -57,7 +56,7 @@ $C_t$ is the cashflow for time period $t$
 
 **What's the discount rate?**  
 Its an interest rate you decide on to account for the risks listed above.
-For example):
+For example:
 - 1/5 (20%) chance of getting laid off or taking a new opportunity every year
 - 5% gains in the market you miss out on if you had the money to invest now
 - 2% annual price inflation
