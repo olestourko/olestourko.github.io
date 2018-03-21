@@ -25,6 +25,7 @@ These are things like bonuses, retirement savings plan matching, expense reimbur
 
 I think its useful to split these items into three categories based on tangibility:
 
+### Highly tangible perks
 Things like bonuses, RRSP contribution matching, company stock, etc... are basically deferred cashflows. For example, you have to wait 1 year
 to receive a bonus. You have to wait 2 years (or more) for employer RRSP/401k contributions or stock to fully vest. 
 
@@ -116,7 +117,7 @@ For example, if the employer offers employee discounts on things I don't buy any
 
 If I see myself getting \\$500 reimbursed to take some professional development course, then I'll use \\$500.  
 
-### Intangible Perks
+### Intangible perks
 These are the most subjective perks, and are often valuable because of your personal situation even though your employer
 doesnt pay expenses for them.
 
