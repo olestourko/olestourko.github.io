@@ -114,7 +114,7 @@ Find word `w`: $argmax_w \space similarity(e_w, e_{king} - e_{man} + e_{woman})$
 **Similarity Function: Cosine Similarity**  
 $sim(u, v) = \frac{u^{T}v}{\lVert u \rVert_2 \lVert v \rVert_2} = \cos(\theta)$  
 
-![Cosine similairity](/assets/study-notes/sequence-models/nlp/cosine_sim.png)
+![Cosine similarity](/assets/study-notes/sequence-models/nlp/cosine_sim.png)
 
 _reminder:_ norm of `u` = $\lVert u \rVert_2 = \sqrt{\sum^n_{i=1} u^2_i }$
 
@@ -139,4 +139,38 @@ _In practice, a column lookup function is used instead of matrix multiplication 
 
 ---
 
-More notes to come
+### Learning Word Embeddings
+ 
+You can learn word embeddings by learning a [language model](https://en.wikipedia.org/wiki/Language_model).  
+
+
+Example - using a vocabulary size of 10,000 and 300 word embeddings (making $E$ a 300, 10,000 matrix):  
+
+![Neural Language Model](/assets/study-notes/sequence-models/nlp/7.png)
+**Fig 5**
+
+_Fig 5: $o_n$ is the one-hot vector representation for that word.  
+$e_n$ is the embedding representation vector of size 300 for word $n$._
+
+The `softmax` returns a probability distribution for the next word in the sequence - in this case, "juice" should be the
+most likely.
+
+**The parameters of the learning algorithm will be**:  
+$E$: The embedding matrix  
+$W^{[1]}, b^{[1]}$: the dense layer  
+$W^{[2]}, b^{[2]}$: the softmax layer
+  
+![Neural Language Model - Paramaters](/assets/study-notes/sequence-models/nlp/8.png)  
+**Fig 6**
+  
+_Fig 6: the $e_n$ vectors can be stacked together, giving a vector of size 1800 in this case ($6 \times 300$)._
+
+**You can also use an arbitrary window for selecting words.** Instead of using the entire previous phrase, you can just
+use the last 4 words or something else like that.  
+
+![Other Context / Target Pairs](/assets/study-notes/sequence-models/nlp/9.png)  
+**Fig 7**
+
+---
+
+More notes to come..
