@@ -173,4 +173,76 @@ use the last 4 words or something else like that.
 
 ---
 
+**Learning Model: Skip-Gram Model (Word2Vec)**  
+
+Its called skip-gram because you choose some target $t$ that skips some words ahead of contect $c$.  
+
+![Skip-Gram Model](/assets/study-notes/sequence-models/nlp/10.png)  
+**Fig 8**
+
+The problem with this model is that the summation in `softmax` is computationally intensive, since you have to sum over the
+entire vocabulary:
+
+$$\textrm{softmax:}\space p(t \vert c) = \frac{e^{\theta^T_t e_c}}{\sum^{10,000}_{j=1} e^{\theta^T_j e_c}}$$
+
+---
+
+**Learning Model: Negative Sampling**
+
+Looking at the problem another way; pick some context/target pairs and do binary classification to see which are correct.
+
+**I want a glass of _orange_ juice to go along with my cereal.**  
+
+| Context | Word | Target?
+|:---|:--- |:--- |
+| orange | juice | 1 |
+| orange | king | 0 |
+| orange | book | 0 |
+| orange | the | 0 |
+| orange | of | 0 |
+
+<br>
+Then create a supervised learning problem to train on these pairs:    
+![Negative Sampling](/assets/study-notes/sequence-models/nlp/11.png)  
+**Fig 9** 
+
+_Fig 9: $K$ should be 5-20 for smaller training sets and 2-5 for larget training sets._
+
+The actual model looks like this:
+
+![Negative Sampling Model](/assets/study-notes/sequence-models/nlp/12.png)  
+**Fig 10**  
+
+$P(y=1 \vert c, y) = \textrm{sigmoid}(\theta^T_t e_c)$
+
+$o_{6257} \longrightarrow E \longrightarrow e_{6257} \longrightarrow \textrm{is "juice"?, is "king"?, etc...}$
+
+There are 10,000 binary classification problems instead of a `softmax` with summation, but you only train on a very small
+subset of those problems with each iteration.
+
+**How do you sample the negative examples?**  
+Option 1: sample based on frequency of each word  
+Option 2: sample randomly: $\frac{1}{\vert v \vert}$  
+Option 3: sample with a heuristic that combines the two (best):  
+
+$$P(w_i) = \frac{f(w_i)^{\frac{3}{4}}}{\sum^{10,000}_{j=1} f(w_j)^{\frac{3}{4}} }$$
+
+---
+
+**Learning Model: GloVe Word Vectors**  
+
+For every $c, t$, count how many times in the text corpus the target $t$ appears in context of $c$.  
+
+$x_{ij}$ = Number of times $i$ ($t$) appears in context of $j$ ($c$).
+
+$$ \textrm{minimize:} \space \sum_{i=1}^{10,000} \sum^{10,000}_{j=1} f(X_{ij}) (\theta^T_i e_j + b_i + b_j - \log X_{ij})^2$$
+
+Where $f(X_ij)$ is a weighting term which equals 0 if $X_{ij}$ is 0, and call also be used to tweak the weight of certain words
+(commonly "this", "is", "of", "a", etc...)
+
+![GloVe Model](/assets/study-notes/sequence-models/nlp/13.png)  
+**Fig 11** 
+
+---
+
 More notes to come..
