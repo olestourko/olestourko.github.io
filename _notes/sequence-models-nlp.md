@@ -206,7 +206,7 @@ Then create a supervised learning problem to train on these pairs:
 ![Negative Sampling](/assets/study-notes/sequence-models/nlp/11.png)  
 **Fig 9** 
 
-_Fig 9: $K$ should be 5-20 for smaller training sets and 2-5 for larget training sets._
+_Fig 9: $K$ should be 5-20 for smaller training sets and 2-5 for largest training sets._
 
 The actual model looks like this:
 
@@ -245,4 +245,43 @@ Where $f(X_ij)$ is a weighting term which equals 0 if $X_{ij}$ is 0, and call al
 
 ---
 
-More notes to come..
+### Applications using Word Embeddings  
+
+**Sentiment Classification**  
+
+![Sentiment Classification - Simple Model](/assets/study-notes/sequence-models/nlp/14.png)  
+**Fig 12**  
+
+The problem with this though is that it isn't able to account for word order.  
+**"Completely lacking in _good_ taste, _good_ service, and _good_ ambiance."** would probably be classified as a positive
+review because of the frequency of _good_, even though it is a very negative review.  
+
+A solution is to use a RNN model instead:
+
+![Sentiment Classification - RNN Model](/assets/study-notes/sequence-models/nlp/15.png)  
+**Fig 13**
+
+---
+
+**Debiasing Word Embeddings**  
+
+**Man:Woman as King:Queen** [OK]  
+**Man:Computer_Programmer as Woman:Homemaker** [Undesirable]  
+**Man:Doctor as Woman:Nurse** [Undesirable]
+
+Word embeddings will reflect the gender/ethnic/age/etc... biases from the text used to train the model, which is
+undesirable in many applications.
+
+![Bias Embeddings](/assets/study-notes/sequence-models/nlp/16.png)  
+**Fig 13**
+
+1. Identify Bias direction.  
+$$\textrm{average} \left\{\begin{array}{l}e_{he} - e_{she} \\ e_{male} - e_{female} \\ \vdots \end{array}\right.$$
+
+2. Neutralize: For every word that is not definitional (gender/age/etc.. not part of its dictionary definition),
+project it to get rid of the bias.
+
+3. Equalize pairs - make the word pairs equidistant from the non-bias axis.
+
+![Bias Embeddings - After](/assets/study-notes/sequence-models/nlp/17.png)  
+**Fig 14**
