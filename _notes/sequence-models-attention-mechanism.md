@@ -58,5 +58,70 @@ The 2nd sentence might be picked as best by greedy search if _going_ ($y^{\langl
 probable than _visiting_, even though the 1st sentence is a better translation overall.
 
 ---
+**Beam Search**
+
+Greedy search picks the one most probable words and moves on, while Beam Search considers multiple alternatives. It has 
+a parameter $B$, which controls the _beam width_. $B = 3$ means there are 3 most likely possibilities to choose from at
+any time.
+
+**Step 1**  
+For the first step of evaluation, beam search finds the $B$ most likely possibilities by passing the sentence to translate
+through an encoder/decoder network fragment (Figure 5) to find $P(y^{\langle 1 \rangle} \vert x )$, where $y^{\langle 1 \rangle}$
+is a `softmax` output.
+
+![Beam Search - Step 1](/assets/study-notes/sequence-models/attention-mechanism/3.png)  
+**Fig 3**  
+
+**Step 2**  
+The second step of evaluation, beam search finds $P(y^{\langle 1 \rangle}, y^{\langle 2 \rangle} \vert x )$, building off
+the $B$ best possibilities chosen in the previous step. The decoder network fragments now have another RNN cell, to which
+the previous best word is hardcoded as the input. 
+
+![Beam Search - Step 2](/assets/study-notes/sequence-models/attention-mechanism/4.png)
+![Beam Search - Step 2](/assets/study-notes/sequence-models/attention-mechanism/5.png)  
+ **Fig 4, 5**  
+_Note that you'll have 3 copies of the network fragment._
+
+**Step 3..end**  
+The same flow is continued for all further steps, and eventual `<EOS>` is found for each beam.
+
+![Beam Search - Step 3](/assets/study-notes/sequence-models/attention-mechanism/6.png)
+**Fig 6**  
+
+---
+**Refinements to Beam Search: Length Normalization**
+
+Beam search tries to maximize the probability
+
+$$\textrm{argmax} \space \prod_{t=1}^{T_y} P(y^{\langle t \rangle} \vert x, y^{\langle 1 \rangle}, y^{\langle t-1 \rangle})$$
+
+which approaches a very small problem for larger translation sentences, because $P(y^{\langle 1 \rangle}, \dots, y^{\langle T_y \rangle} \vert x) = 
+P(y^{\langle 1 \rangle} | x) \times P(y^{\langle 2 \rangle} | x, y^{\langle 1 \rangle}) \dots$
+
+Having a very small number is undesirable because it can cause floating point round-off issues.  
+
+In practice, instead use  
+
+$$\textrm{argmax} \space \sum_{t=1}^{T_y} \log P(y^{\langle t \rangle} \vert x, y^{\langle 1 \rangle}, y^{\langle t-1 \rangle})$$
+
+to avoid these issues. Maximizing this sum of probabilities will still give Beam Search the same result.  
+_Note: the log of a probability (n < 1) is always negative, so shouldn't this be a minimization problem instead?_  
+
+You can also normalize the sum by the number of words in the translation, which will give even better results:  
+
+$$\frac{1}{T_y^\alpha} \sum_{t=1}^{T_y} \log P(y^{\langle t \rangle} \vert x, y^{\langle 1 \rangle}, y^{\langle t-1 \rangle})$$  
+
+$\alpha$ is a hyperparameter you can optionally use to soften the normalization (usually set to 0.7). Its really just a 
+heuristic and doesn't have a solid theoretical justification for it, but it still works well.  
+
+**Choosing the Beam Width $B$**  
+
+The larger $B$ is set, then you consider a lot of possibilities and get better results, but the computations also get slower.
+Its a case of diminishing returns.
+
+- Production Systems: $B$ is between 10 and 100  
+- Research Systems: $B$ is between 1,000 and 3,000  
+
+---
 
 More notes to come...
