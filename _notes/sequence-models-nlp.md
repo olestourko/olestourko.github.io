@@ -281,7 +281,19 @@ $$\textrm{average} \left\{\begin{array}{l}e_{he} - e_{she} \\ e_{male} - e_{fema
 2. Neutralize: For every word that is not definitional (gender/age/etc.. not part of its dictionary definition),
 project it to get rid of the bias.
 
+    ![Neutralization](/assets/study-notes/sequence-models/nlp/18.png)  
+    **Fig 14**  
+
+    The neutralization step takes a vector such as $e_{receptionist}$ and zeros out the component in the direction of $g$,
+    giving us $e_{receptionist\\_debiased}$.  
+    
+    $$e^{bias\_component} = \frac{e \cdot g}{||g||_2^2} * g$$
+    
+    $$e^{debiased} = e - e^{bias\_component}$$
+    
+    _$e^{bias\_component}$ is a projection of $e$ onto $g$._
+
 3. Equalize pairs - make the word pairs equidistant from the non-bias axis.
 
 ![Bias Embeddings - After](/assets/study-notes/sequence-models/nlp/17.png)  
-**Fig 14**
+**Fig 15**
