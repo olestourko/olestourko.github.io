@@ -123,5 +123,29 @@ Its a case of diminishing returns.
 - Research Systems: $B$ is between 1,000 and 3,000  
 
 ---
+**Error Analysis in Beam Search**
 
+Sentence to translate: **Jane visite l'Afrique en septembre.**  
+Human translation: **Jane visits Africa in September.** ($y^*$)  
+Machine translation: **Jane visited Africa last September.** ($\hat{y}$)  
+
+The machine translation model has two components; the sequence-to-sequence model (encoder/decoder) and the beam search
+algorithm. **Which component is most responsible for the translation error?**
+
+Compute $P(y^* \vert x)$ and $P(\hat{y} \vert x)$ using the RNN model.
+
+![RNN Model](/assets/study-notes/sequence-models/attention-mechanism/7.png)  
+**Fig 7**  
+
+**Case 1:** $P(y^* \vert x) \gt (\hat{y} \vert x)$  
+Beam search chose $\hat{y}$, but $y^*$ attains higher $P(y \vert x)$.  
+Conclusion: Beam search is at fault.  
+
+**Case 2:** $P(y^* \vert x) \le (\hat{y} \vert x)$  
+$y^\*$ is a better translation than $\hat{y}$, but RRN predicted $P(y^\* \vert x) \lt P(\hat{y} \vert x)$.  
+Conclusion: RNN model is at fault.
+
+_Note: if you are using length normalization, you should be evaluating the optimization objective instead of the probabilities._
+
+---
 More notes to come...
