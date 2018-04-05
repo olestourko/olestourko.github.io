@@ -148,4 +148,40 @@ Conclusion: RNN model is at fault.
 _Note: if you are using length normalization, you should be evaluating the optimization objective instead of the probabilities._
 
 ---
+**Bleu Score**  
+A method of measuring how good a machine translation is with a single number.
+
+**French:** Le chat est sur le tapis.  
+**Reference 1:** The cat is on the mat.  
+**Reference 2:** There is a cat on the mat.  
+**MT Output:**  The cat the cat on the mat.
+  
+Blue Score works on pairs of words that are next to each other (bigrams).
+
+$count$ = number of times the bigram appears in the MT Output.  
+$count_{clip}$ = maximum number of times the biagram appears in either of the references.  
+
+|**Bigram** | **Count** | **Clipped Count** |
+|:---|:---|:---|
+| the cat | 2 | 1 |
+| cat the  | 1 | 0 |
+| cat on | 1 | 1 |
+| on the | 1 | 1 |
+| the | 1 | 1 |
+| the mat | 1 | 1 |
+
+$$\textrm{Bleu Score on n-grams only} = P_n = \frac{\sum_{\textrm{n-gram} \in \hat{y}} count_{clip}(\textrm{n-gram}) }
+{\sum_{\textrm{n-gram} \in \hat{y}} count(\textrm{n-gram})}$$
+
+You would compute the Blue Scores for $P_1, P_2, P_3, P_4$ (n-grams 1 to 4) and combine them to get a final Blue Score:  
+
+$$\textrm{BP} \times \exp \left(\frac{1}{4} \sum_{n=1}^{4} P_n \right)$$  
+
+Where $\textrm{BP}$ is a brevity penalty which penalizes translations that are too short.  
+
+$\textrm{BP} = \textrm{1 if MT_output_length > reference_length}$    
+$\textrm{BP} = \exp(1 - \textrm{MT_output_length\reference_output_length}) \space \textrm{otherwise.}$
+
+---
+
 More notes to come...
