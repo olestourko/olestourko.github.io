@@ -183,5 +183,36 @@ $\textrm{BP} = \textrm{1 if MT_output_length > reference_length}$
 $\textrm{BP} = \exp(1 - \textrm{MT_output_length\reference_output_length}) \space \textrm{otherwise.}$
 
 ---
+**Attention Model**  
+When humans translate text; we don't read through an entire long sentence at once before beginning to translation. We look at
+fragments instead, and the Attention Model is an RNN equivalent.
+
+![Attention Model - Simplified](/assets/study-notes/sequence-models/attention-mechanism/8.png)  
+**Fig 8**  
+
+1. Bidirectional RNN (bottom)
+2. Output of bottom RNNs are combined into context $c$, using a set of attention weights $\alpha^{\langle t, t' \rangle}$ ($t$ = word being computed,
+$t'$ = RNN being grabbed from)
+3. Combinations are fed into a unidirectional RNN (top), and translated words are output (remember, its a `softmax` acros the vocabulary.)
+
+**Model Details**  
+
+![Attention Model - Detailed](/assets/study-notes/sequence-models/attention-mechanism/9.png)    
+**Fig 9**
+  
+$$context^{<t>} = \sum_{t' = 0}^{T_x} \alpha^{<t,t'>}a^{<t'>}$$  
+
+$$\alpha^{\langle t, t' \rangle} = 
+\frac{\textrm{exp}(e^{\langle t, t' \rangle})}
+{\sum_{t'=1}^{T_x} \textrm{exp}(e^{\langle t, t' \rangle})}$$
+
+Notice that $\alpha^{\langle t, t' \rangle}$ is just a version of `softmax`, and they will all equal to 1.  
+The $e^{\langle t, t' \rangle}$ term can be found with a small neural network:
+
+![e term](/assets/study-notes/sequence-models/attention-mechanism/10.png)  
+![Attention Model - Detailed](/assets/study-notes/sequence-models/attention-mechanism/11.png)  
+**Fig 10, 11**    
+
+---
 
 More notes to come...
