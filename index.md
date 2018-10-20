@@ -4,11 +4,8 @@ title: Oles Tourko
 
 ## About Me
 
-I am a software developer, mostly using Python and PHP.
-My current job is full-stack web developer at [Digital Extremes](http://www.digitalextremes.com/) in London, Ontario.
-My background is in Computer Science and I've been doing web development professionally for the past 4 years. Backend and full-stack roles are my favourite when it comes to web.
-
-I'm also a machine learning hobbyist and am very interested in how we can use it to solve problems. Investing and sustainability are areas I like, and my personal projects are _usually_ related to them.
+I'm a software developer with professional experience in digital commerce, video games, and most recently insurance.
+Right now Python is my main language for work and play. I'm also a value investor for fun, and sometimes even profit!
 
 [My CV / Resumé]({{ 'assets/download/oles-tourko-cv.pdf' | absolute_url }})
 
@@ -16,6 +13,8 @@ I'm also a machine learning hobbyist and am very interested in how we can use it
 
 Email: [olestourko@gmail.com](mailto:olestourko@gmail.com)  
 LinkedIn: [olestourko](https://www.linkedin.com/in/olestourko/)
+
+Feel free to add me on Telegram if we know each other from the real world somehow.
 
 ---
 
