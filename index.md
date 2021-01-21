@@ -4,12 +4,13 @@ title: Oles Tourko
 
 ## About Me
 
-Software Developer, Maker, Rabbit herder
+Software Developer, Maker, Lagomorph herder
 
-[CV / Resumé]({{ 'assets/download/oles-tourko-cv.pdf' | absolute_url }})
+![No Context](/assets/index/rabbit.jpg)
 
 Email: [otourko@mailbox.org](mailto:otourko@mailbox.org)  
-LinkedIn: [olestourko](https://www.linkedin.com/in/olestourko/)
+LinkedIn: [olestourko](https://www.linkedin.com/in/olestourko/)  
+CV / Resumé: [download PDF]({{ 'assets/download/oles-tourko-cv.pdf' | absolute_url }})
 
 ---
 
